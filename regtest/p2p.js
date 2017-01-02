@@ -37,7 +37,7 @@ var blocks;
 describe('P2P Functionality', function() {
 
   before(function(done) {
-    this.timeout(100000);
+    this.timeout(200000);
 
     // enable regtest
     bitcore.Networks.enableRegtest();

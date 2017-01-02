@@ -29,7 +29,7 @@ var destKey = bitcore.PrivateKey();
 describe('Bitcoind Functionality', function() {
 
   before(function(done) {
-    this.timeout(60000);
+    this.timeout(200000);
 
     // Add the regtest network
     bitcore.Networks.enableRegtest();

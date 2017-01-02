@@ -147,7 +147,7 @@ describe('Node Functionality', function() {
     var address;
     var unspentOutput;
     before(function(done) {
-      this.timeout(100000);
+      this.timeout(200000);
       address = testKey.toAddress(regtest).toString();
       var startHeight = node.services.bitcoind.height;
       node.services.bitcoind.on('tip', function(height) {

@@ -52,7 +52,7 @@ describe('Bitcoin Cluster', function() {
 
   before(function(done) {
     log.info('Starting 3 dashd daemons');
-    this.timeout(60000);
+    this.timeout(200000);
     async.each(nodesConf, function(nodeConf, next) {
       var opts = [
         '--regtest',
