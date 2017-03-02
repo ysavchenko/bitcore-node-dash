@@ -5199,12 +5199,12 @@ describe('#getMNlist', function() {
     });
     it('will call client masternode full and give result', function(done) {
       var bitcoind = new BitcoinService(baseConfig);
-      var generate = sinon.stub().callsArgWith(1, null, {
+      var masternode = sinon.stub().callsArgWith(1, null, {
         result: [MNdetails]
       });
       bitcoind.nodes.push({
         client: {
-          generate: generate
+          masternode: masternode
         }
       });
       bitcoind.generateBlock(10, function(err, hashes) {
