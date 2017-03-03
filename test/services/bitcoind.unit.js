@@ -5177,7 +5177,7 @@ describe('Bitcoin Service', function() {
 
   });
 
-describe('#getMNlist', function() {
+  describe('#getMNlist', function() {
     var MNdetails = {
       '3e739c0219595365c28cb8e14606f18d183500ee13bbedfee8c755a502cbc70a-1': 'NEW_START_REQUIRED 70206 yXXQNnSDhijos1Ucq9NiJMEcFRF6nZGjKq 1486207842   170674          0      0 88.99.15.34:19999',
       'a9dec34daa02d7537d47cefdb2c5131585f97eb8b90c1ccf63675ed3129ca704-1': 'NEW_START_REQUIRED 70206 yaffS5bPkfZ211SXbvNyQxFRRP5tL2dZtN 1486196162        0          0      0 176.31.145.17:19999',
@@ -5185,13 +5185,13 @@ describe('#getMNlist', function() {
     };
     it('will give rpc error', function(done) {
       var bitcoind = new BitcoinService(baseConfig);
-      var generate = sinon.stub().callsArgWith(1, {message: 'error', code: -1});
+      var masternodelist = sinon.stub().callsArgWith(1, 'full', {message: 'error', code: -1});
       bitcoind.nodes.push({
         client: {
-          generate: generate
+          masternodelist: masternodelist
         }
       });
-      bitcoind.generateBlock(10, function(err) {
+      bitcoind.getMNlist(function(err, response) {
         should.exist(err);
         err.should.be.an.instanceof(errors.RPCError);
         done();
@@ -5199,25 +5199,24 @@ describe('#getMNlist', function() {
     });
     it('will call client masternode full and give result', function(done) {
       var bitcoind = new BitcoinService(baseConfig);
-      var masternode = sinon.stub().callsArgWith(1, null, {
-        result: [MNdetails]
+      bitcoind.node.getNetworkName = sinon.stub().returns('testnet');
+      var masternodelist = sinon.stub().callsArgWith(1, null, {
+        result: MNdetails
       });
       bitcoind.nodes.push({
         client: {
-          masternode: masternode
+          masternodelist: masternodelist
         }
       });
-      bitcoind.masternodelist('full', function(err, response) {
+      bitcoind.getMNlist(function(err, response) {
         if (err) {
           return done(err);
         }
-        response.length.should.equal(3);
         response.should.equal(MNdetails);
         done();
       });
     });
   });
-
 
   describe('#generateBlock', function() {
     it('will give rpc error', function(done) {
