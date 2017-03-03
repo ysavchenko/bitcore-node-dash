@@ -5207,12 +5207,12 @@ describe('#getMNlist', function() {
           masternode: masternode
         }
       });
-      bitcoind.generateBlock(10, function(err, hashes) {
+      bitcoind.masternodelist('full', function(err, response) {
         if (err) {
           return done(err);
         }
-        hashes.length.should.equal(1);
-        hashes[0].should.equal(MNdetails);
+        response.length.should.equal(3);
+        response.should.equal(MNdetails);
         done();
       });
     });
