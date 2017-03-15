@@ -5338,9 +5338,7 @@ describe('Bitcoin Service', function() {
     });
     it('will call client generate and give result', function(done) {
       var bitcoind = new BitcoinService(baseConfig);
-      var decoderawtransaction = sinon.stub().callsArgWith(1, null, {
-      response
-      });
+      var decoderawtransaction = sinon.stub().callsArgWith(1, null, response);
       bitcoind.nodes.push({
         client: {
           decoderawtransaction: decoderawtransaction
