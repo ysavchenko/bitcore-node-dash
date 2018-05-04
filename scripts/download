@@ -21,8 +21,8 @@ else
     exit -1
 fi
 
-binary_url="${url}/${tarball_name}"
-shasums_url="${url}/SHA256SUMS.asc"
+binary_url="https://github.com/dashpay/dash/releases/download/v0.12.2.3/dashcore-0.12.2.3-linux64.tar.gz"
+shasums_url="https://github.com/dashpay/dash/releases/download/v0.12.2.3/SHA256SUMS.asc"
 
 download_bitcoind() {
 
